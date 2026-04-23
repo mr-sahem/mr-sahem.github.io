@@ -39,7 +39,7 @@
     object-fit: contain;
     top: 0;
     left: 0;
-    transition: opacity 1s ease; /* transition time when hovering */
+    transition: opacity 3s ease; /* transition time when hovering */
   }
 
   /* hide hover image by default */
@@ -59,45 +59,63 @@
 </head>
 
 <body>
-<!-- referencing icons -->
 <div class="grid">
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/journal.wav">
     <img class="default" src="icons/2pt-Journal-Variation-1.png">
     <img class="hover" src="icons/2pt-Journal-Variation-2.png">
   </div>
-
-  <div class="icon">
-    <img class="default" src="icons/2pt-Lucidity-Variation-1.png">
-    <img class="hover" src="icons/2pt-Lucidity-Variation-2.png">
+  <div class="icon" data-sound="/sounds/lucidity.wav">
+    <img class="default" src="icons/2pt-Lucidity-Variation-2.png">
+    <img class="hover" src="icons/2pt-Lucidity-Variation-1.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/sound.wav">
     <img class="default" src="icons/2pt-Sound-Variation-2.png">
     <img class="hover" src="icons/2pt-Sound-Variation-1.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/share.wav">
     <img class="default" src="icons/2pt-Share-Variation-2.png">
     <img class="hover" src="icons/2pt-Share-Variation-1.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/emotions.wav">
     <img class="default" src="icons/2pt-Emotions-Variation-1.png">
     <img class="hover" src="icons/2pt-Emotions-Variation-2.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/goals.wav">
     <img class="default" src="icons/2pt-Goals-Variation-2.png">
     <img class="hover" src="icons/2pt-Goals-Variation-1.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/reflections.wav">
     <img class="default" src="icons/2pt-Reflections-Variation-1.png">
     <img class="hover" src="icons/2pt-Reflections-Variation-2.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/archive.wav">
     <img class="default" src="icons/2pt-Archive-Variation-2.png">
     <img class="hover" src="icons/2pt-Archive-Variation-1.png">
   </div>
-  <div class="icon">
+  <div class="icon" data-sound="/sounds/reminders.wav">
     <img class="default" src="icons/2pt-Pre-Sleep-Reminders-Variation-2.png">
     <img class="hover" src="icons/2pt-Pre-Sleep-Reminders-Variation-1.png">
   </div>
+
+  <script>
+  const icons = document.querySelectorAll(".icon");
+  const audioPlayer = new Audio();
+
+  icons.forEach(icon => {
+
+    const soundSrc = icon.dataset.sound;
+
+    icon.addEventListener("pointerenter", () => {
+      audioPlayer.src = soundSrc;
+      audioPlayer.currentTime = 0;
+
+      audioPlayer.play().catch(err => {
+        console.log(err);
+      });
+    });
+
+  });
+</script>
 
 </body>
 </html>
